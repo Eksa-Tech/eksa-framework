@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eksa Framework | Modern Ruby Development</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="/img/logo.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top left, #4f46e5, #764ba2, #2d3748);
+      background-attachment: fixed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-blur {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-link {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: #a5b4fc;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Custom Scrollbar untuk list pesan */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="text-white antialiased">
+  
+  <% if @flash && @flash[:notice] %>
+    <div id="flash-msg" class="fixed top-24 left-1/2 -translate-x-1/2 z-[60] animate__animated animate__fadeInDown">
+      <div class="flex items-center gap-3 bg-emerald-500/90 backdrop-blur-md text-white px-6 py-3 rounded-2xl shadow-2xl border border-emerald-400/50 shadow-emerald-900/40">
+        <i data-lucide="check-circle" class="w-5 h-5"></i>
+        <span class="font-bold text-sm tracking-wide"><%= @flash[:notice] %></span>
+        <button onclick="closeFlash()" class="ml-4 opacity-50 hover:opacity-100 transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+    <script>
+      function closeFlash() {
+        const msg = document.getElementById('flash-msg');
+        if(msg) {
+          msg.classList.replace('animate__fadeInDown', 'animate__fadeOutUp');
+          setTimeout(() => msg.remove(), 800);
+        }
+      }
+      // Otomatis tutup setelah 4 detik
+      setTimeout(closeFlash, 4000);
+    </script>
+  <% end %>
+
+  <nav class="nav-blur sticky top-0 z-50 px-6 py-4 flex items-center justify-between animate__animated animate__fadeInDown">
+    <div onclick="window.location.href='/'" class="flex items-center gap-3 group cursor-pointer">
+      <div class="p-2 bg-indigo-500 rounded-xl shadow-lg shadow-indigo-500/50 group-hover:rotate-12 transition-transform">
+        <i data-lucide="layers" class="w-6 h-6"></i>
+      </div>
+      <span class="text-xl font-extrabold tracking-tight">Eksa<span class="text-indigo-300">Framework</span></span>
+    </div>
+
+    <ul class="hidden md:flex items-center gap-8 font-medium text-sm">
+      <li><a href="/" class="nav-link flex items-center gap-2"><i data-lucide="home" class="w-4 h-4"></i> Home</a></li>
+      <li><a href="/about" class="nav-link flex items-center gap-2"><i data-lucide="info" class="w-4 h-4"></i> About</a></li>
+      <li><a href="/docs" class="nav-link flex items-center gap-2"><i data-lucide="book-open" class="w-4 h-4"></i> Docs</a></li>
+    </ul>
+
+    <div class="flex items-center gap-4">
+       <a href="https://github.com/IshikawaUta" target="_blank" class="p-2 hover:bg-white/10 rounded-full transition"><i data-lucide="github" class="w-5 h-5"></i></a>
+    </div>
+  </nav>
+
+  <main class="max-w-6xl mx-auto py-12 px-6 flex-grow animate__animated animate__fadeInUp">
+    <%= @content %>
+  </main>
+
+  <footer class="py-8 text-center text-white/40 text-sm border-t border-white/5">
+    <p>&copy; <%= Time.now.year %> <span class="font-bold text-white/60">Eksa Framework</span>. Crafted for speed.</p>
+  </footer>
+
+  <script>
+    // Inisialisasi ikon Lucide
+    lucide.createIcons();
+  </script>
+</body>
+</html>

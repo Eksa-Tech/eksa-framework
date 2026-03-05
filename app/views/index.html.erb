@@ -1,0 +1,108 @@
+<div class="glass rounded-3xl p-8 animate__animated animate__fadeIn">
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+    <div>
+      <span class="inline-block bg-indigo-500/20 text-indigo-200 text-xs font-bold px-3 py-1 rounded-full mb-3 border border-indigo-500/30">
+        v0.1.0 Alpha
+      </span>
+      <h1 class="text-4xl font-extrabold tracking-tight">
+        Halo, <span class="text-indigo-300"><%= @nama %></span>!
+      </h1>
+      <p class="text-white/60 mt-2">
+        Selamat datang di dunia pengembangan web yang bersih dan cepat dengan <strong>Eksa Framework</strong>.
+      </p>
+    </div>
+
+    <form action="/" method="get" class="flex w-full md:w-auto">
+      <div class="relative w-full">
+        <input type="text" name="q" placeholder="Cari pesan..." value="<%= @keyword %>" 
+               class="w-full md:w-48 bg-white/5 border border-white/10 rounded-xl py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:w-64 transition-all duration-300 placeholder-white/30 text-sm">
+        <button type="submit" class="absolute right-2 top-1.5 p-1 text-white/40 hover:text-white transition">
+          <i data-lucide="search" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+    
+    <div class="lg:col-span-2 space-y-6">
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+        <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+          <i data-lucide="pen-tool" class="w-5 h-5 text-indigo-300"></i> Kirim Pesan
+        </h2>
+        <form action="/" method="post" class="space-y-4">
+          <div>
+            <input type="text" name="pengirim" placeholder="Nama Anda" required 
+                   class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition placeholder-white/20">
+          </div>
+          <div>
+            <textarea name="konten" placeholder="Tulis pesan kreatifmu di sini..." required 
+                      class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition placeholder-white/20 h-32 resize-none"></textarea>
+          </div>
+          <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl transition duration-300 flex items-center justify-center gap-2 shadow-lg shadow-indigo-900/20">
+            <i data-lucide="send" class="w-4 h-4"></i> Simpan ke SQLite
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="lg:col-span-3">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-bold flex items-center gap-2">
+          <i data-lucide="message-square" class="w-5 h-5 text-indigo-300"></i> Pesan Terbaru
+        </h2>
+        <% if @keyword && !@keyword.empty? %>
+          <a href="/" class="text-xs bg-white/10 hover:bg-white/20 px-3 py-1 rounded-lg transition flex items-center gap-1">
+            <i data-lucide="x" class="w-3 h-3"></i> Bersihkan Filter
+          </a>
+        <% end %>
+      </div>
+
+      <% if @keyword && !@keyword.empty? %>
+        <p class="text-sm text-white/40 mb-4 italic">Menampilkan hasil pencarian untuk "<%= @keyword %>"</p>
+      <% end %>
+
+      <div class="space-y-4 overflow-y-auto max-h-[500px] pr-2 custom-scrollbar">
+        <% if @semua_pesan.any? %>
+          <% @semua_pesan.each do |p| %>
+            <div class="bg-white/5 border border-white/10 p-5 rounded-2xl flex justify-between items-start group hover:bg-white/10 transition duration-300 animate__animated animate__fadeInUp">
+              <div class="max-w-[70%]">
+                <div class="flex items-center gap-2 mb-1">
+                  <div class="w-2 h-2 bg-indigo-400 rounded-full"></div>
+                  <strong class="text-indigo-200"><%= p[2] %></strong>
+                </div>
+                <p class="text-white/70 text-sm leading-relaxed"><%= p[1] %></p>
+              </div>
+              
+              <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <a href="/edit?id=<%= p[0] %>" title="Edit"
+                   class="p-2 bg-white/10 hover:bg-indigo-500 rounded-lg transition">
+                  <i data-lucide="edit-3" class="w-4 h-4 text-white"></i>
+                </a>
+                <a href="/hapus?id=<%= p[0] %>" 
+                   onclick="return confirm('Yakin ingin menghapus pesan dari <%= p[2] %>?')" 
+                   title="Hapus"
+                   class="p-2 bg-white/10 hover:bg-red-500 rounded-lg transition">
+                  <i data-lucide="trash-2" class="w-4 h-4 text-white"></i>
+                </a>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="flex flex-col items-center justify-center py-20 bg-white/5 rounded-2xl border border-dashed border-white/10">
+            <i data-lucide="ghost" class="w-12 h-12 text-white/10 mb-2"></i>
+            <p class="text-white/30 italic text-sm">
+              <%= @keyword ? "Tidak ada pesan yang cocok." : "Database masih kosong." %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Refresh icons for new content
+  lucide.createIcons();
+</script>

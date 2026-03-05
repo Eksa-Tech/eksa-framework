@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'fileutils'
+
+gem_root = File.expand_path("../..", __FILE__)
+target_dir = Dir.pwd
+
+puts "\n✨ Eksa Framework Generator ✨"
+puts "-----------------------------"
+puts "🚀 Menginisialisasi project di: #{target_dir}"
+
+items_to_init = ['app', 'lib', 'public', 'db', 'config.ru', 'Gemfile', 'README.md']
+
+items_to_init.each do |item|
+  source = File.join(gem_root, item)
+  destination = File.join(target_dir, item)
+  
+  if File.exist?(source)
+    if File.directory?(source)
+      FileUtils.cp_r(source, target_dir)
+      puts "  [OK] Folder '#{item}' berhasil disalin."
+    else
+      FileUtils.cp(source, destination)
+      puts "  [OK] File '#{item}' berhasil disalin."
+    end
+  else
+    if item == 'db'
+      FileUtils.mkdir_p(destination)
+      puts "  [OK] Folder 'db' baru berhasil dibuat."
+    else
+      puts "  [!] Warning: Sumber '#{item}' tidak ditemukan."
+    end
+  end
+end
+
+puts "\n✅ Inisialisasi Selesai!"
+puts "-----------------------------"
+puts "Instruksi selanjutnya:"
+puts "1. Jalankan: bundle install"
+puts "2. Jalankan server: rackup config.ru"
+puts "3. Buka browser: http://localhost:9292"
+puts "-----------------------------\n"
