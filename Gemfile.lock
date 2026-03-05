@@ -1,0 +1,25 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    nio4r (2.7.5)
+    puma (7.2.0)
+      nio4r (~> 2.0)
+    rack (3.2.5)
+    sqlite3 (2.9.1-x86_64-linux-gnu)
+
+PLATFORMS
+  x86_64-linux-gnu
+
+DEPENDENCIES
+  puma
+  rack
+  sqlite3
+
+CHECKSUMS
+  nio4r (2.7.5) sha256=6c90168e48fb5f8e768419c93abb94ba2b892a1d0602cb06eef16d8b7df1dca1
+  puma (7.2.0) sha256=bf8ef4ab514a4e6d4554cb4326b2004eba5036ae05cf765cfe51aba9706a72a8
+  rack (3.2.5) sha256=4cbd0974c0b79f7a139b4812004a62e4c60b145cba76422e288ee670601ed6d3
+  sqlite3 (2.9.1-x86_64-linux-gnu) sha256=1cbb644204ed143e5c96f6d59b5c571ba6f18b18a9dc5aa11c101187ff227afd
+
+BUNDLED WITH
+  4.0.4
