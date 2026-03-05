@@ -21,22 +21,24 @@ module Eksa
       if route
         controller_instance = route[:controller].new(request)
         controller_instance.flash[:notice] = flash_message if flash_message
-        
-        response_body = controller_instance.send(route[:action])
-        
-        response = Rack::Response.new
-
-        if controller_instance.status == 302
-          response.redirect(controller_instance.redirect_url, 302)
+        response_data = controller_instance.send(route[:action])
+        if response_data.is_a?(Array) && response_data.size == 3
+          status, headers, body = response_data
+          response = Rack::Response.new(body, status, headers)
         else
-          response.write(response_body)
-          response['content-type'] = 'text/html'
+          response = Rack::Response.new
+          if controller_instance.status == 302
+            response.redirect(controller_instance.redirect_url, 302)
+          else
+            response.write(response_data)
+            response['content-type'] = 'text/html'
+          end
         end
 
         response.delete_cookie('eksa_flash') if flash_message
         response.finish
       else
-        [404, { 'content-type' => 'text/html' }, ["<h1>404 - Not Found</h1>"]]
+        [404, { 'content-type' => 'text/html' }, ["<div style='font-family:sans-serif; text-align:center; padding-top:50px;'><h1>404</h1><p>Halaman tidak ditemukan di Eksa Framework.</p></div>"]]
       end
     end
   end

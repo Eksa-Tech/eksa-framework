@@ -62,7 +62,7 @@
         <p class="text-sm text-white/40 mb-4 italic">Menampilkan hasil pencarian untuk "<%= @keyword %>"</p>
       <% end %>
 
-      <div class="space-y-4 overflow-y-auto max-h-[500px] pr-2 custom-scrollbar">
+      <div class="space-y-4 overflow-y-auto max-h-[320px] pr-2 custom-scrollbar">
         <% if @semua_pesan.any? %>
           <% @semua_pesan.each do |p| %>
             <div class="bg-white/5 border border-white/10 p-5 rounded-2xl flex justify-between items-start group hover:bg-white/10 transition duration-300 animate__animated animate__fadeInUp">

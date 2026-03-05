@@ -10,12 +10,15 @@
 ---
 
 ## 🚀 Fitur Unggulan
-- 💎 **Modern Glassmorphism UI**: Tampilan transparan yang indah dengan Tailwind CSS & Lucide Icons.
-- ⚡ **Rack 3 Ready**: Menggunakan standar terbaru dengan penanganan header modern.
-- 🛠️ **CLI Generator**: Siapkan struktur project instan dengan perintah `eksa-init`.
-- 💾 **Auto-Migration DB**: Database SQLite otomatis dibuat saat server pertama kali dijalankan.
-- 🔔 **Flash Messages**: Notifikasi animasi elegan yang kompatibel dengan cookie Rack 3.
-- 🛤️ **Simple Routing**: Sistem routing yang eksplisit dan mudah dikelola di `config.ru`.
+
+* 💎 **Modern Glassmorphism UI**: Tampilan transparan yang indah dengan Tailwind CSS & Lucide Icons.
+* ⚡ **Rack 3 Ready**: Menggunakan standar terbaru dengan penanganan header modern.
+* 🛠️ **CLI Generator**: Siapkan struktur project instan dengan perintah `eksa-init`.
+* 💾 **Auto-Migration DB**: Database SQLite otomatis dibuat saat server pertama kali dijalankan.
+* 🔔 **Flash Messages**: Notifikasi animasi elegan yang kompatibel dengan cookie Rack 3.
+* 🛤️ **Simple Routing**: Sistem routing yang eksplisit dan mudah dikelola di `config.ru`.
+* 🔍 **Dynamic SEO Engine**: Penanganan otomatis file `robots.txt` dan `sitemap.xml` yang adaptif terhadap rute aplikasi.
+* 🧩 **Smart Response Handling**: Framework kini mampu mendeteksi dan mengeksekusi array respons Rack manual untuk konten non-HTML (XML/Plain Text).
 
 ---
 
