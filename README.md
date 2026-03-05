@@ -102,4 +102,4 @@ Eksa menggunakan **Tailwind CSS** dan **Animate.css**. Anda dapat mengatur efek 
 
 ## 📜 Lisensi
 
-Proyek ini dilisensikan di bawah **MIT License**. Lihat file [LICENSE](https://www.google.com/search?q=LICENSE) untuk detail lebih lanjut.
+Proyek ini dilisensikan di bawah **MIT License**. Lihat file [LICENSE](LICENSE) untuk detail lebih lanjut.
