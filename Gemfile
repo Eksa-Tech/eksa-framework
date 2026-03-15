@@ -9,3 +9,5 @@ gem 'rack'
 gem 'puma'
 gem "rackup"
 gem 'sqlite3'
+gem 'kramdown'
+gem 'kramdown-parser-gfm'

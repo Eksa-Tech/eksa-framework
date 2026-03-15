@@ -10,6 +10,7 @@ def usage
   puts "  eksa init              - Inisialisasi project baru"
   puts "  eksa g controller NAME - Generate controller baru"
   puts "  eksa g model NAME      - Generate model baru"
+  puts "  eksa g post TITLE      - Generate blog post markdown baru"
   puts "  eksa run               - Jalankan server aplikasi"
   puts "-----------------------------\n"
 end
@@ -20,7 +21,7 @@ def init_project
   
   puts "🚀 Menginisialisasi project di: #{target_dir}"
   
-  items_to_init = ['app', 'lib', 'public', 'db', 'spec', 'config.ru', 'Gemfile', 'README.md']
+  items_to_init = ['app', 'lib', 'public', 'db', 'spec', '_posts', 'config.ru', 'Gemfile', 'README.md']
   
   items_to_init.each do |item|
     source = File.join(gem_root, item)
@@ -114,6 +115,26 @@ def generate_model(name)
   puts "  [OK] Created #{file_path}"
 end
 
+def generate_post(title)
+  FileUtils.mkdir_p("_posts")
+  date = Time.now.strftime("%Y-%m-%d")
+  slug = title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+  filename = "_posts/#{date}-#{slug}.md"
+
+  content = <<~MARKDOWN
+    ---
+    title: "#{title}"
+    date: #{Time.now.strftime("%Y-%m-%d %H:%M:%S")}
+    ---
+
+    Tulis konten blog Anda di sini...
+  MARKDOWN
+
+  File.write(filename, content)
+  puts "🛠️ Generating post: #{title}"
+  puts "  [OK] Created #{filename}"
+end
+
 def start_server
   if File.exist?('config.ru')
     puts "🚀 Memulai Eksa Framework Server..."
@@ -138,6 +159,8 @@ when 'g', 'generate'
     generate_controller(name)
   elsif subcommand == 'model' && name
     generate_model(name)
+  elsif subcommand == 'post' && name
+    generate_post(name)
   else
     usage
   end

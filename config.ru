@@ -17,5 +17,7 @@ app.add_route "/docs", PagesController, :docs
 app.add_route "/kontak", PagesController, :kontak
 app.add_route "/robots.txt", SeoController, :robots
 app.add_route "/sitemap.xml", SeoController, :sitemap
+app.add_route "/posts", PostsController, :index
+app.add_route "/posts/:slug", PostsController, :show
 
 run app

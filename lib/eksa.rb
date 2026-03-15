@@ -2,6 +2,7 @@ require 'rack'
 require_relative 'eksa/version'
 require_relative 'eksa/controller'
 require_relative 'eksa/model'
+require_relative 'eksa/markdown_post'
 
 module Eksa
   class Application
@@ -22,7 +23,13 @@ module Eksa
     end
 
     def add_route(path, controller_class, action)
-      @routes[path] = { controller: controller_class, action: action }
+      pattern = path.gsub(/:\w+/, '([^/]+)')
+      @routes[path] = { 
+        controller: controller_class, 
+        action: action, 
+        regex: Regexp.new("\\A#{pattern}\\z"),
+        keys: path.scan(/:(\w+)/).flatten
+      }
     end
 
     def use(middleware, *args, &block)
@@ -46,12 +53,28 @@ module Eksa
     def core_call(env)
       request = Rack::Request.new(env)
       flash_message = request.cookies['eksa_flash']
-      route = @routes[request.path_info]
+      
+      # Find matching route
+      route_config = nil
+      params = {}
+      
+      @routes.each do |path, config|
+        if match = config[:regex].match(request.path_info)
+          route_config = config
+          config[:keys].each_with_index do |key, index|
+            params[key] = match[index + 1]
+          end
+          break
+        end
+      end
 
-      if route
-        controller_instance = route[:controller].new(request)
+      if route_config
+        # Merge dynamic params into request params
+        request.params.merge!(params)
+        
+        controller_instance = route_config[:controller].new(request)
         controller_instance.flash[:notice] = flash_message if flash_message
-        response_data = controller_instance.send(route[:action])
+        response_data = controller_instance.send(route_config[:action])
         if response_data.is_a?(Array) && response_data.size == 3
           status, headers, body = response_data
           response = Rack::Response.new(body, status, headers)

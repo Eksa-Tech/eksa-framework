@@ -1,0 +1,31 @@
+<div class="glass rounded-3xl p-10 text-white animate__animated animate__fadeIn">
+  <div class="mb-8">
+    <a href="/posts" class="inline-flex items-center gap-2 text-indigo-300 hover:text-white transition mb-6">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Blog
+    </a>
+    <span class="text-xs font-bold text-indigo-300 uppercase tracking-widest block mb-2">
+      <%= @post.date.is_a?(Time) ? @post.date.strftime("%d %B %Y") : @post.date %>
+    </span>
+    <h3 class="text-5xl font-extrabold tracking-tight mb-4"><%= @post.title %></h3>
+    <div class="h-1 w-20 bg-indigo-500 rounded-full"></div>
+  </div>
+
+  <div class="prose prose-invert prose-indigo max-w-none leading-relaxed text-white/80">
+    <%= @post.body_html %>
+  </div>
+
+  <style>
+    .prose h1, .prose h2, .prose h3 { color: white; margin-top: 2em; margin-bottom: 0.5em; font-weight: 800; }
+    .prose h2 { font-size: 1.8em; }
+    .prose p { margin-bottom: 1.5em; }
+    .prose blockquote { border-left: 4px solid #6366f1; padding-left: 1.5em; font-style: italic; color: rgba(255,255,255,0.6); }
+    .prose ul { list-style-type: disc; padding-left: 1.5em; margin-bottom: 1.5em; }
+    .prose code { background: rgba(255,255,255,0.1); padding: 0.2em 0.4em; border-radius: 0.4em; font-size: 0.9em; font-weight: 600; color: #a5b4fc; }
+    .prose code::before, .prose code::after { content: none !important; }
+    .prose pre code { background: transparent; padding: 0; color: inherit; font-weight: inherit; }
+    /* Prism tweaks */
+    code[class*="language-"], pre[class*="language-"] { font-size: 0.9em !important; text-shadow: none !important; }
+  </style>
+</div>
+
+<script>lucide.createIcons();</script>

@@ -1,9 +1,9 @@
-# ✨ Eksa Framework
+---
+title: "Welcome To Eksa Framework"
+date: 2026-03-15 14:09:58
+---
 
-[![Ruby Version](https://img.shields.io/badge/ruby-3.0+-red.svg)](https://www.ruby-lang.org/)
-[![Rack Version](https://img.shields.io/badge/rack-3.0+-blue.svg)](https://rack.github.io/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Framework Role](https://img.shields.io/badge/UI-Glassmorphism-indigo.svg)](#)
+# ✨ Eksa Framework
 
 **Eksa Framework** adalah *micro-framework* MVC (Model-View-Controller) modern yang dibangun di atas Ruby dan Rack. Didesain untuk pengembang yang menginginkan kecepatan, kode yang bersih, dan tampilan antarmuka **Glassmorphism** yang elegan secara *out-of-the-box*.
 
@@ -123,4 +123,4 @@ bundle exec rspec
 ---
 
 ## 📜 Lisensi
-Proyek ini dilisensikan di bawah **MIT License**. Lihat file [LICENSE](LICENSE) untuk detail lebih lanjut.
+Proyek ini dilisensikan di bawah **MIT License**. Lihat file [LICENSE](https://github.com/IshikawaUta/eksa-framework/blob/8c8e9046cbce77bbeaeaf673b018eaf0c6db2bbc/LICENSE) untuk detail lebih lanjut.
