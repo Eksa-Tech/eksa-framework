@@ -1,12 +1,13 @@
 require './lib/eksa'
-require './app/controllers/pages_controller'
-
-use Rack::Static, urls: ["/css", "/img"], root: "public"
-use Rack::ShowExceptions
 
 Dir[File.join(__dir__, 'app/controllers/*.rb')].each { |file| require_relative file }
 
-app = Eksa::Application.new
+app = Eksa::Application.new do |config|
+  config.config[:db_path] = File.expand_path("./db/eksa_app.db")
+  
+  config.use Rack::Static, urls: ["/css", "/img"], root: "public"
+  config.use Rack::ShowExceptions
+end
 
 app.add_route "/", PagesController, :index
 app.add_route "/hapus", PagesController, :hapus_pesan

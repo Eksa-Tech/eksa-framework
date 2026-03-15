@@ -12,97 +12,94 @@
 ## 🚀 Fitur Unggulan
 
 * 💎 **Modern Glassmorphism UI**: Tampilan transparan yang indah dengan Tailwind CSS & Lucide Icons.
-* ⚡ **Rack 3 Ready**: Menggunakan standar terbaru dengan penanganan header modern.
-* 🛠️ **CLI Generator**: Siapkan struktur project instan dengan perintah `eksa-init`.
-* 💾 **Auto-Migration DB**: Database SQLite otomatis dibuat saat server pertama kali dijalankan.
-* 🔔 **Flash Messages**: Notifikasi animasi elegan yang kompatibel dengan cookie Rack 3.
-* 🛤️ **Simple Routing**: Sistem routing yang eksplisit dan mudah dikelola di `config.ru`.
-* 🔍 **Dynamic SEO Engine**: Penanganan otomatis file `robots.txt` dan `sitemap.xml` yang adaptif terhadap rute aplikasi.
-* 🧩 **Smart Response Handling**: Framework kini mampu mendeteksi dan mengeksekusi array respons Rack manual untuk konten non-HTML (XML/Plain Text).
+* ⚡ **Rack 3 & Middleware Support**: Mendukung standar terbaru dan pembuatan pipeline middleware kustom.
+* 🛠️ **Powerful CLI**: Inisialisasi project (`eksa init`), jalankan server (`eksa run`), dan generate komponen secara instan.
+* 💾 **Dynamic Database Engine**: Database SQLite otomatis dengan schema yang ditentukan oleh model Anda sendiri.
+* 🧪 **Built-in Testing**: Lingkungan pengujian otomatis siap pakai menggunakan RSpec dan `rack-test`.
+* 🎨 **Asset Helpers**: Library bawaan untuk pengelolaan CSS dan JS yang lebih rapi.
+* 🔍 **Dynamic SEO Engine**: Penanganan otomatis file `robots.txt` dan `sitemap.xml`.
 
 ---
 
 ## 🛠️ Instalasi Cepat
 
 ### 1. Install via Gem
-Anda bisa menginstal framework ini langsung dengan `gem`:
-
 ```bash
 gem install eksa-framework
 ```
 
 ### 2. Inisialisasi Project Baru
-
-Masuk ke folder baru, lalu jalankan generator Eksa:
-
 ```bash
-mkdir my-awesome-app
-cd my-awesome-app
-eksa-init
+mkdir my-app && cd my-app
+eksa init
 ```
 
 ### 3. Jalankan Server
-
 ```bash
 bundle install
-rackup config.ru
+eksa run
 ```
-
-Buka browser dan akses `http://localhost:9292`.
 
 ---
 
 ## 💻 Panduan Pengembangan
 
-### 1. Struktur Folder
-
-Eksa memisahkan data dari logika aplikasi dengan folder `db` di level root:
-
-* `app/`: Logic & Views (Controllers, Models, Views).
-* `db/`: File database SQLite `eksa_app.db` (Terpisah dari app).
-* `lib/eksa/`: Core Engine (The magic happens here).
-* `public/`: File statis (CSS, Images, JS).
-
-### 2. Menambah Route & Controller
-
-Daftarkan rute di `config.ru`:
+### 1. Konfigurasi Aplikasi (`config.ru`)
+Eksa kini menggunakan blok inisialisasi untuk konfigurasi yang lebih fleksibel:
 
 ```ruby
-app.add_route "/profil", PagesController, :profil
-```
-
-Buat method di `app/controllers/pages_controller.rb`:
-
-```ruby
-def profil
-  render :profil # Merujuk ke app/views/profil.html.erb
+app = Eksa::Application.new do |config|
+  config.config[:db_path] = "./db/production.db"
+  
+  config.use Rack::Static, urls: ["/css", "/img"], root: "public"
+  config.use Rack::ShowExceptions
 end
 ```
 
-### 3. Database & Model
+### 2. CLI Generator
+Hemat waktu dengan menggunakan generator bawaan:
 
-Eksa akan otomatis membuat tabel saat Anda mendefinisikannya di `lib/eksa/model.rb`. Untuk menggunakan data di controller:
+```bash
+# Membuat controller dan view template
+eksa g controller Blog
 
-```ruby
-@pesan = Pesan.all # Menggunakan model app/models/pesan.rb
+# Membuat model dan schema database
+eksa g model Post
 ```
 
----
+### 3. Database & Model
+Definisikan schema tabel Anda langsung di dalam model:
 
-## 🎨 Kustomisasi Visual
+```ruby
+class Post < Eksa::Model
+  def self.setup_schema
+    db.execute <<~SQL
+      CREATE TABLE IF NOT EXISTS posts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT,
+        content TEXT
+      )
+    SQL
+  end
+end
+```
 
-Eksa menggunakan **Tailwind CSS** dan **Animate.css**. Anda dapat mengatur efek kaca pada class `.glass` di `app/views/layout.html.erb`:
+### 4. Asset Helpers
+Gunakan helper di dalam view untuk menyisipkan asset:
 
-```css
-.glass {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
+```erb
+<%= stylesheet_tag "style" %>
+<%= javascript_tag "app" %>
+```
+
+### 5. Menjalankan Test
+Pastikan aplikasi Anda berjalan dengan benar menggunakan RSpec:
+
+```bash
+bundle exec rspec
 ```
 
 ---
 
 ## 📜 Lisensi
-
 Proyek ini dilisensikan di bawah **MIT License**. Lihat file [LICENSE](LICENSE) untuk detail lebih lanjut.

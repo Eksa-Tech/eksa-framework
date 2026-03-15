@@ -1,4 +1,14 @@
 class Pesan < Eksa::Model
+  def self.setup_schema
+    db.execute <<-SQL
+      CREATE TABLE IF NOT EXISTS pesan (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        konten TEXT,
+        pengirim TEXT
+      );
+    SQL
+  end
+
   def self.semua
     db.execute("SELECT * FROM pesan ORDER BY id DESC")
   end

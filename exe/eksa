@@ -1,0 +1,129 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'fileutils'
+
+def usage
+  puts "\n✨ Eksa Framework CLI ✨"
+  puts "-----------------------------"
+  puts "Usage:"
+  puts "  eksa init              - Inisialisasi project baru"
+  puts "  eksa g controller NAME - Generate controller baru"
+  puts "  eksa g model NAME      - Generate model baru"
+  puts "  eksa run               - Jalankan server aplikasi"
+  puts "-----------------------------\n"
+end
+
+def init_project
+  gem_root = File.expand_path("../..", __FILE__)
+  target_dir = Dir.pwd
+  
+  puts "🚀 Menginisialisasi project di: #{target_dir}"
+  
+  items_to_init = ['app', 'lib', 'public', 'db', 'spec', 'config.ru', 'Gemfile', 'README.md']
+  
+  items_to_init.each do |item|
+    source = File.join(gem_root, item)
+    destination = File.join(target_dir, item)
+    
+    if File.exist?(source)
+      if File.directory?(source)
+        FileUtils.cp_r(source, target_dir)
+        puts "  [OK] Folder '#{item}' berhasil disalin."
+      else
+        FileUtils.cp(source, destination)
+        puts "  [OK] File '#{item}' berhasil disalin."
+      end
+    elsif item == 'db'
+      FileUtils.mkdir_p(destination)
+      puts "  [OK] Folder 'db' baru berhasil dibuat."
+    end
+  end
+  puts "\n✅ Inisialisasi Selesai!"
+end
+
+def generate_controller(name)
+  name = name.downcase
+  class_name = name.split('_').map(&:capitalize).join
+  file_path = "app/controllers/#{name}_controller.rb"
+  view_dir = "app/views/#{name}"
+
+  puts "🛠️ Generating controller: #{class_name}Controller"
+
+  content = <<~RUBY
+    class #{class_name}Controller < Eksa::Controller
+      def index
+        render "#{name}/index"
+      end
+    end
+  RUBY
+
+  FileUtils.mkdir_p("app/controllers")
+  File.write(file_path, content)
+  puts "  [OK] Created #{file_path}"
+
+  FileUtils.mkdir_p(view_dir)
+  index_view = File.join(view_dir, "index.html.erb")
+  File.write(index_view, "<h1>#{class_name}#index</h1>\n<p>Temukan saya di #{index_view}</p>")
+  puts "  [OK] Created #{index_view}"
+end
+
+def generate_model(name)
+  name = name.downcase
+  class_name = name.split('_').map(&:capitalize).join
+  file_path = "app/models/#{name}.rb"
+
+  puts "🛠️ Generating model: #{class_name}"
+
+  content = <<~RUBY
+    class #{class_name} < Eksa::Model
+      def self.setup_schema
+        db.execute <<~SQL
+          CREATE TABLE IF NOT EXISTS #{name}s (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+          )
+        SQL
+      end
+
+      def self.all
+        db.execute("SELECT * FROM #{name}s ORDER BY id DESC")
+      end
+    end
+  RUBY
+
+  FileUtils.mkdir_p("app/models")
+  File.write(file_path, content)
+  puts "  [OK] Created #{file_path}"
+end
+
+def start_server
+  if File.exist?('config.ru')
+    puts "🚀 Memulai Eksa Framework Server..."
+    exec "rackup config.ru"
+  else
+    puts "❌ Error: config.ru tidak ditemukan. Pastikan Anda berada di root project Eksa."
+    exit 1
+  end
+end
+
+command = ARGV.shift
+
+case command
+when 'init'
+  init_project
+when 'run'
+  start_server
+when 'g', 'generate'
+  subcommand = ARGV.shift
+  name = ARGV.shift
+  if subcommand == 'controller' && name
+    generate_controller(name)
+  elsif subcommand == 'model' && name
+    generate_model(name)
+  else
+    usage
+  end
+else
+  usage
+end

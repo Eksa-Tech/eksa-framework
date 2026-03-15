@@ -5,15 +5,45 @@ require_relative 'eksa/model'
 
 module Eksa
   class Application
+    attr_reader :config, :middlewares
+
     def initialize
       @routes = {}
+      @middlewares = []
+      @config = {
+        db_path: File.expand_path("./db/eksa_app.db")
+      }
+      yield self if block_given?
+      configure_framework
+    end
+
+    def configure_framework
+      Eksa::Model.database_path = @config[:db_path]
     end
 
     def add_route(path, controller_class, action)
       @routes[path] = { controller: controller_class, action: action }
     end
 
+    def use(middleware, *args, &block)
+      @middlewares << [middleware, args, block]
+    end
+
     def call(env)
+      @app ||= build_app
+      @app.call(env)
+    end
+
+    def build_app
+      builder = Rack::Builder.new
+      @middlewares.each do |middleware, args, block|
+        builder.use(middleware, *args, &block)
+      end
+      builder.run(method(:core_call))
+      builder.to_app
+    end
+
+    def core_call(env)
       request = Rack::Request.new(env)
       flash_message = request.cookies['eksa_flash']
       route = @routes[request.path_info]

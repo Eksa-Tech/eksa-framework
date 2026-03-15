@@ -15,6 +15,18 @@ module Eksa
       @request.params
     end
 
+    def stylesheet_tag(filename)
+      "<link rel='stylesheet' href='/css/#{filename}.css'>"
+    end
+
+    def javascript_tag(filename)
+      "<script src='/js/#{filename}.js'></script>"
+    end
+
+    def asset_path(path)
+      path.start_with?('/') ? path : "/#{path}"
+    end
+
     def redirect_to(url, notice: nil)
       @status = 302
       @redirect_url = url
@@ -36,7 +48,11 @@ module Eksa
           @content
         end
       else
-        "Error: View '#{template_name}' tidak ditemukan."
+        "<div class='glass' style='padding: 2rem; border-radius: 1rem; color: #ff5555; background: rgba(255,0,0,0.1); backdrop-filter: blur(10px);'>
+          <h2 style='margin-top:0;'>⚠️ View Error</h2>
+          <p>Template <strong>#{template_name}</strong> tidak ditemukan di:</p>
+          <code style='display:block; background:rgba(0,0,0,0.2); padding:0.5rem; border-radius:0.5rem;'>#{content_path}</code>
+        </div>"
       end
     end
   end

@@ -44,7 +44,7 @@
       </div>
       <div>
         <p class="text-white/30"># 2. Inisialisasi project baru</p>
-        <p class="text-indigo-300">eksa-init</p>
+        <p class="text-indigo-300">eksa init</p>
       </div>
       <div>
         <p class="text-white/30"># 3. Install dependensi</p>
@@ -52,7 +52,7 @@
       </div>
       <div>
         <p class="text-white/30"># 4. Jalankan server</p>
-        <p class="text-indigo-300">rackup config.ru</p>
+        <p class="text-indigo-300">eksa run</p>
       </div>
     </div>
   </section>
@@ -75,8 +75,12 @@
         <p class="text-xs text-white/50 mt-1">Mesin inti (Core Engine) dari Eksa Framework.</p>
       </div>
       <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+        <code class="text-indigo-300 font-bold">spec/</code>
+        <p class="text-xs text-white/50 mt-1">Folder testing otomatis menggunakan RSpec (disertakan saat <code class="text-indigo-200">init</code>).</p>
+      </div>
+      <div class="bg-white/5 p-4 rounded-xl border border-white/10">
         <code class="text-indigo-300 font-bold">exe/</code>
-        <p class="text-xs text-white/50 mt-1">Executable files seperti generator <code class="text-indigo-200">eksa-init</code>.</p>
+        <p class="text-xs text-white/50 mt-1">Executable files seperti CLI <code class="text-indigo-200">eksa</code>.</p>
       </div>
     </div>
   </section>
@@ -123,11 +127,13 @@
 
   <section id="build" class="mb-12 scroll-mt-24">
     <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-      <i data-lucide="package-check" class="w-6 h-6 text-indigo-400"></i> Build ke RubyGems
+      <i data-lucide="package-check" class="w-6 h-6 text-indigo-400"></i> Build & Publish
     </h2>
     <div class="bg-black/40 rounded-2xl p-6 font-mono text-sm border border-white/10">
+      <p class="text-white/30"># Build gem lokal</p>
       <p class="text-indigo-300">gem build eksa-framework.gemspec</p>
-      <p class="text-indigo-300 mt-2">gem install ./eksa-framework-0.1.0.gem</p>
+      <p class="text-white/30 mt-4"># Publish ke RubyGems / GitHub Packages</p>
+      <p class="text-indigo-300">gem push eksa-framework-1.2.1.gem</p>
     </div>
   </section>
 
