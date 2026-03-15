@@ -66,6 +66,23 @@ def generate_controller(name)
   index_view = File.join(view_dir, "index.html.erb")
   File.write(index_view, "<h1>#{class_name}#index</h1>\n<p>Temukan saya di #{index_view}</p>")
   puts "  [OK] Created #{index_view}"
+
+  # Update config.ru with a new route
+  if File.exist?('config.ru')
+    config_content = File.read('config.ru')
+    route_line = %(app.add_route "/#{name}", #{class_name}Controller, :index)
+    
+    unless config_content.include?(route_line)
+      if config_content.match?(/run app/)
+        new_content = config_content.gsub(/run app/, "#{route_line}\n\nrun app")
+        File.write('config.ru', new_content)
+        puts "  [OK] Added route to config.ru"
+      else
+        File.open('config.ru', 'a') { |f| f.puts "\n#{route_line}" }
+        puts "  [OK] Appended route to config.ru"
+      end
+    end
+  end
 end
 
 def generate_model(name)
