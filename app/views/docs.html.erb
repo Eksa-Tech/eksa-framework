@@ -6,16 +6,16 @@
       </div>
       <h1 class="text-4xl font-extrabold tracking-tight">Dokumentasi <span class="text-indigo-300">Eksa</span></h1>
     </div>
-    <p class="text-white/60 text-lg">Panduan profesional instalasi dan pengembangan aplikasi menggunakan Eksa Framework v3.5.0.</p>
+    <p class="text-white/60 text-lg">Panduan profesional instalasi dan pengembangan aplikasi menggunakan Eksa Framework v3.5.1.</p>
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
     <div class="space-y-4">
       <h3 class="font-bold text-indigo-300 uppercase text-xs tracking-widest">Memulai</h3>
       <ul class="space-y-2 text-sm">
-        <li><a href="#instalasi" class="hover:text-indigo-300 transition flex items-center gap-2"><i data-lucide="download" class="w-3 h-3"></i> Instalasi Gem</a></li>
+        <li><a href="#instalasi" class="hover:text-indigo-300 transition flex items-center gap-2"><i data-lucide="download" class="w-3 h-3"></i> Instalasi & Run</a></li>
+        <li><a href="#struktur" class="hover:text-indigo-300 transition flex items-center gap-2"><i data-lucide="folder-tree" class="w-3 h-3"></i> Struktur Project</a></li>
         <li><a href="#keamanan" class="hover:text-indigo-300 transition flex items-center gap-2"><i data-lucide="shield" class="w-3 h-3"></i> Setup Keamanan</a></li>
-        <li><a href="#struktur" class="hover:text-indigo-300 transition flex items-center gap-2"><i data-lucide="folder" class="w-3 h-3"></i> Struktur Project</a></li>
       </ul>
     </div>
     <div class="space-y-4">
@@ -38,7 +38,7 @@
 
   <section id="instalasi" class="mb-12 scroll-mt-24">
     <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-      <i data-lucide="terminal" class="w-6 h-6 text-indigo-400"></i> Instalasi Cepat
+      <i data-lucide="terminal" class="w-6 h-6 text-indigo-400"></i> Instalasi & Eksekusi
     </h2>
     <div class="bg-black/40 rounded-2xl p-6 font-mono text-sm border border-white/10 space-y-3">
       <div>
@@ -56,16 +56,66 @@
     </div>
   </section>
 
+  <section id="struktur" class="mb-12 scroll-mt-24">
+    <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+      <i data-lucide="folder-tree" class="w-6 h-6 text-indigo-400"></i> Struktur Project
+    </h2>
+    <p class="text-white/60 mb-4 text-sm">Eksa mengikuti konvensi MVC yang sederhana namun powerful.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+        <code class="text-indigo-300 font-bold">app/</code>
+        <p class="text-xs text-white/50 mt-1">Folders: <code class="text-white">controllers/</code>, <code class="text-white">models/</code>, <code class="text-white">views/</code>.</p>
+      </div>
+      <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+        <code class="text-indigo-300 font-bold">_posts/</code>
+        <p class="text-xs text-white/50 mt-1">Pusat konten blog berbasis Markdown (.md).</p>
+      </div>
+      <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+        <code class="text-indigo-300 font-bold">public/</code>
+        <p class="text-xs text-white/50 mt-1">Asset statis: <code class="text-white">css/</code>, <code class="text-white">img/</code>, <code class="text-white">js/</code>.</p>
+      </div>
+      <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+        <code class="text-indigo-300 font-bold">db/</code>
+        <p class="text-xs text-white/50 mt-1">Penyimpanan <code class="text-white">eksa_app.db</code> (SQLite) dan skrip inisialisasi.</p>
+      </div>
+      <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+        <code class="text-indigo-300 font-bold">config.ru</code>
+        <p class="text-xs text-white/50 mt-1">Konfigurasi Rack, Middleware, dan Routing utama.</p>
+      </div>
+      <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+        <code class="text-indigo-300 font-bold">.env</code>
+        <p class="text-xs text-white/50 mt-1">Variabel lingkungan untuk kredensial database & secret key.</p>
+      </div>
+    </div>
+  </section>
+
   <section id="keamanan" class="mb-12 scroll-mt-24">
     <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
       <i data-lucide="shield-check" class="w-6 h-6 text-indigo-400"></i> Setup Keamanan (.env)
     </h2>
-    <p class="text-white/60 mb-4 text-sm">Gunakan file <code class="text-indigo-200">.env</code> untuk menyimpan kredensial sensitif seperti URI MongoDB Atlas dan Secret Session.</p>
+    <p class="text-white/60 mb-4 text-sm">Gunakan file <code class="text-indigo-200">.env</code> untuk menyimpan kredensial sensitif.</p>
     <div class="bg-black/40 rounded-2xl p-6 font-mono text-sm border border-white/10 space-y-2">
       <p class="text-white/30"># Salin template example</p>
       <p class="text-indigo-300">cp .env.example .env</p>
       <p class="text-white/30 mt-4"># Isi EKSA_MONGODB_URI di dalam .env</p>
       <p class="text-indigo-300">EKSA_MONGODB_URI="mongodb+srv://..."</p>
+    </div>
+  </section>
+
+  <section id="routing" class="mb-12 scroll-mt-24">
+    <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+      <i data-lucide="git-branch" class="w-6 h-6 text-indigo-400"></i> Routing System
+    </h2>
+    <p class="text-white/60 mb-4 text-sm">Definisikan endpoint aplikasi Anda di <code class="text-indigo-200">config.ru</code>. Eksa mendukung parameter dinamis.</p>
+    <div class="bg-black/40 rounded-2xl p-6 font-mono text-sm border border-white/10 space-y-4">
+      <div>
+        <p class="text-white/30"># Struktur: add_route(path, controller, action)</p>
+        <p class="text-indigo-300 italic">app.add_route "/", PagesController, :index</p>
+        <p class="text-indigo-300 italic">app.add_route "/blog/:slug", BlogController, :show</p>
+      </div>
+      <div class="p-3 bg-white/5 rounded-lg border border-white/10">
+          <p class="text-xs text-white/50 italic">Eksa akan otomatis memetakan <code class="text-white">:slug</code> menjadi <code class="text-white">params['slug']</code> di dalam controller.</p>
+      </div>
     </div>
   </section>
 
@@ -90,14 +140,14 @@
     <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
       <i data-lucide="zap" class="w-6 h-6 text-indigo-400"></i> Just-In-Time Schema Initialization
     </h2>
-    <p class="text-white/60 mb-4 text-sm">Anda tidak perlu lagi menjalankan migrasi manual. Eksa akan mendeteksi dan membuat tabel/koleksi secara otomatis tepat saat model pertama kali diakses.</p>
+    <p class="text-white/60 mb-4 text-sm">Eksa mendeteksi dan membuat tabel/koleksi secara otomatis tepat saat model pertama kali diakses (JIT).</p>
     <div class="bg-black/40 rounded-2xl p-6 font-mono text-sm border border-white/10">
-      <p class="text-white/30"># Definisikan saja di model</p>
-      <p class="text-indigo-300">class Post < Eksa::Model</p>
+      <p class="text-white/30"># Contoh di Model</p>
+      <p class="text-indigo-300">class Message < Eksa::Model</p>
       <p class="text-indigo-300 italic ml-4">def self.setup_schema</p>
-      <p class="text-indigo-300 italic ml-8">db.execute "CREATE TABLE IF NOT EXISTS ..."</p>
+      <p class="text-indigo-300 italic ml-8">db.execute "CREATE TABLE IF NOT EXISTS messages..."</p>
       <p class="text-indigo-300 italic ml-4">end</p>
-      <p class="text-indigo-300">main</p>
+      <p class="text-indigo-300">end</p>
     </div>
   </section>
 
@@ -128,12 +178,12 @@
 
   <section id="seo" class="mb-12 scroll-mt-24">
     <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-      <i data-lucide="search" class="w-6 h-6 text-indigo-400"></i> SEO & JSON-LD (Structured Data)
+      <i data-lucide="search" class="w-6 h-6 text-indigo-400"></i> SEO & JSON-LD
     </h2>
-    <p class="text-white/60 mb-4 text-sm">Eksa v3.5.0 secara otomatis menyematkan data terstruktur untuk ranking pencarian yang lebih baik.</p>
+    <p class="text-white/60 mb-4 text-sm">Eksa v3.5.1 menyematkan data terstruktur secara otomatis untuk ranking pencarian yang lebih baik.</p>
     <div class="bg-white/5 p-4 rounded-xl border border-white/10 flex items-center gap-3">
         <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400"></i>
-        <p class="text-xs text-white/70">Mendukung <code class="text-indigo-300">sitemap.xml</code>, <code class="text-indigo-300">robots.txt</code>, dan skema <code class="text-indigo-300">BlogPosting</code> secara dinamis.</p>
+        <p class="text-xs text-white/70">Mendukung <code class="text-indigo-300">sitemap.xml</code>, <code class="text-indigo-300">robots.txt</code> secara dinamis.</p>
     </div>
   </section>
 
@@ -142,7 +192,7 @@
         <span class="bg-indigo-500/20 text-indigo-300 text-[10px] px-3 py-1 rounded-full border border-indigo-500/30 uppercase tracking-tighter">Rack 3.0 Compatible</span>
         <span class="bg-emerald-500/20 text-emerald-300 text-[10px] px-3 py-1 rounded-full border border-emerald-500/30 uppercase tracking-tighter">Production Ready</span>
     </div>
-    <p class="text-white/40 text-sm italic">Eksa Framework v3.5.0 Professional Documentation</p>
+    <p class="text-white/40 text-sm italic">Eksa Framework v3.5.1 Professional Documentation</p>
     <a href="/" class="inline-block mt-6 text-indigo-300 hover:text-white transition font-bold flex items-center justify-center gap-2">
       <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Beranda
     </a>

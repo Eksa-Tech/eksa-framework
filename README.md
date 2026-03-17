@@ -1,4 +1,4 @@
-# ✨ Eksa Framework v3.5.0
+# ✨ Eksa Framework v3.5.1
 
 [![Ruby Version](https://img.shields.io/badge/ruby-3.0+-red.svg)](https://www.ruby-lang.org/)
 [![Rack Version](https://img.shields.io/badge/rack-3.0+-blue.svg)](https://rack.github.io/)
@@ -9,7 +9,7 @@
 
 ---
 
-## 🚀 Fitur Unggulan v3.5.0
+## 🚀 Fitur Unggulan v3.5.1
 
 * 💎 **Modern Glassmorphism UI**: Tampilan transparan yang indah dengan Tailwind CSS & Lucide Icons.
 * ⚡ **Rack 3 & Middleware Support**: Mendukung standar terbaru dan pembuatan pipeline middleware kustom.
