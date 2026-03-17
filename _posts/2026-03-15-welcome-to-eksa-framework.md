@@ -7,15 +7,16 @@ category: Framework
 image: https://res.cloudinary.com/dzsqaauqn/image/upload/v1773645204/logo_ne3hy4.png
 ---
 
-# ✨ Eksa Framework v3.5.0
+# ✨ Eksa Framework v3.5.2
 
 **Eksa Framework** adalah *micro-framework* MVC (Model-View-Controller) modern yang dibangun di atas Ruby dan Rack. Didesain untuk pengembang yang menginginkan kecepatan, kode yang bersih, dan tampilan antarmuka **Glassmorphism** yang elegan secara *out-of-the-box*.
 
 ---
 
-## 🚀 Fitur Unggulan v3.5.0
+## 🚀 Fitur Unggulan v3.5.2
 
 * 💎 **Modern Glassmorphism UI**: Tampilan transparan yang indah dengan Tailwind CSS & Lucide Icons.
+* 📱 **Mobile Responsive Navigation**: Sistem navigasi adaptif dengan mobile drawer yang elegan.
 * ⚡ **Rack 3 & Middleware Support**: Mendukung standar terbaru dan pembuatan pipeline middleware kustom.
 * 🛠️ **Powerful CLI**: Inisialisasi project (`eksa init`), jalankan server (`eksa run`), generate komponen, ganti database, dan **migrasi data** otomatis.
 * 💾 **Agnostic Database Engine**: Dukungan multi-database (**SQLite** & **MongoDB Atlas**) dengan sistem adapter yang otomatis dan transparan.
@@ -128,5 +129,15 @@ bundle exec rspec
 
 ---
 
+## 🤝 Kontribusi & Komunitas
+
+Kami sangat terbuka untuk kontribusi dari siapa pun! Silakan baca panduan berikut sebelum memulai:
+
+- **[Panduan Kontribusi](CONTRIBUTING.md)**: Langkah-langkah untuk berkontribusi kode.
+- **[Kebijakan Keamanan](SECURITY.md)**: Cara melaporkan kerentanan secara privat.
+- **[Kode Etik](CODE_OF_CONDUCT.md)**: Standar perilaku dalam komunitas kami.
+
+---
+
 ## 📜 Lisensi
-Proyek ini dilisensikan di bawah **MIT License**. Lihat file [LICENSE](https://github.com/IshikawaUta/eksa-framework/blob/main/LICENSE) untuk detail lebih lanjut.
+Proyek ini dilisensikan di bawah **MIT License**. Lihat file [LICENSE](LICENSE) untuk detail lebih lanjut.
