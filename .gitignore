@@ -1,15 +1,30 @@
-eksa-framework.gemspec
-eksa-framework-0.1.0.gem
-eksa-framework-1.1.0.gem
-eksa-framework-1.1.1.gem
-eksa-framework-1.2.1.gem
-eksa-framework-2.2.1.gem
-eksa-framework-2.2.2.gem
-eksa-framework-2.3.2.gem
-eksa-framework-3.3.2.gem
-eksa-framework-3.3.3.gem
-eksa-framework-3.4.3.gem
-eksa-framework-3.5.0.gem
-eksa-framework-3.5.1.gem
-eksa-framework-3.5.2.gem
+# Compiled Gems
+*.gem
+
+# Dependency directories
+/.bundle/
+/vendor/bundle/
+/lib/bundler/man/
+
+# Build artifacts
+/pkg/
+/doc/
+
+# SQLite Databases
+/db/*.db
+/db/*.sqlite3
+
+# Environment Variables
 .env
+
+# IDE and System Files
+.ruby-lsp/
+.vscode/
+.idea/
+.DS_Store
+.ruby-version
+.ruby-gemset
+
+# Logs and temporary files
+/log/*.log
+/tmp/

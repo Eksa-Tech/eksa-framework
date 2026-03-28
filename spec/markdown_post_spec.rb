@@ -1,8 +1,8 @@
-require 'spec_helper'
+require_relative 'spec_helper'
 require 'fileutils'
 
 describe Eksa::MarkdownPost do
-  before(:all) do
+  before do
     FileUtils.mkdir_p("_posts")
     File.write("_posts/2026-03-15-test-post.md", <<~MARKDOWN)
       ---
@@ -14,7 +14,7 @@ describe Eksa::MarkdownPost do
     MARKDOWN
   end
 
-  after(:all) do
+  after do
     File.delete("_posts/2026-03-15-test-post.md") if File.exist?("_posts/2026-03-15-test-post.md")
   end
 

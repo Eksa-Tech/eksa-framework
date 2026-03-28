@@ -1,5 +1,4 @@
 require 'rack/test'
-require 'rspec'
 
 # Load the framework
 require_relative '../lib/eksa'
@@ -7,16 +6,35 @@ require_relative '../lib/eksa'
 # Set environment to test
 ENV['RACK_ENV'] = 'test'
 
-RSpec.configure do |config|
-  config.include Rack::Test::Methods
+# EksaMination uses Object.new for its example context.
+# We include Rack::Test::Methods into Object so it's available in all tests.
+Object.include Rack::Test::Methods
 
-  config.expect_with :rspec do |expectations|
-    expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+# Monkeypatch EksaMination to fix a TypeError in Formatters::Documentation
+# It currently fails when a description is a Class/Module (not a String)
+require 'eksa-mination'
+module EksaMination
+  class ExampleGroup
+    alias_method :original_description, :description
+    def description
+      original_description.to_s
+    end
   end
 
-  config.mock_with :rspec do |mocks|
-    mocks.verify_partial_doubles = true
+  class Example
+    alias_method :original_description, :description
+    def description
+      original_description.to_s
+    end
   end
 
-  config.shared_context_metadata_behavior = :apply_to_host_groups
+  module Formatters
+    class Documentation
+      def report_failure(example, error)
+        super
+        # Ensure failure message handles classes/modules too
+        puts "  " * @level + colorize(example.description.to_s + " (FAILED)", :red)
+      end
+    end
+  end
 end

@@ -7,6 +7,7 @@ GEM
     bson (5.2.0)
     diff-lcs (1.6.2)
     dotenv (2.8.1)
+    eksa-mination (2.0.0)
     kramdown (2.5.2)
       rexml (>= 3.4.4)
     kramdown-parser-gfm (1.1.0)
@@ -48,6 +49,7 @@ DEPENDENCIES
   bcrypt (~> 3.1)
   bigdecimal (~> 3.1)
   dotenv (~> 2.8)
+  eksa-mination
   kramdown
   kramdown-parser-gfm
   mongo (~> 2.19)
@@ -66,6 +68,7 @@ CHECKSUMS
   bson (5.2.0) sha256=c468c1e8a3cfa1e80531cc519a890f85586986721d8e305f83465cc36bb82608
   diff-lcs (1.6.2) sha256=9ae0d2cba7d4df3075fe8cd8602a8604993efc0dfa934cff568969efb1909962
   dotenv (2.8.1) sha256=c5944793349ae03c432e1780a2ca929d60b88c7d14d52d630db0508c3a8a17d8
+  eksa-mination (2.0.0) sha256=9d2717d24e8b19c7f7a1e2fdbf98d258cda6281309e3dacaac9bb4b0a9e7f750
   kramdown (2.5.2) sha256=1ba542204c66b6f9111ff00dcc26075b95b220b07f2905d8261740c82f7f02fa
   kramdown-parser-gfm (1.1.0) sha256=fb39745516427d2988543bf01fc4cf0ab1149476382393e0e9c48592f6581729
   mongo (2.23.0) sha256=be2fe4cc6f7119fa6b79e82a1963b2406856b4dc92d0ccfb74db543897be3109

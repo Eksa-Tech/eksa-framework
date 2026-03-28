@@ -7,13 +7,13 @@ category: Framework
 image: https://res.cloudinary.com/dzsqaauqn/image/upload/v1773645204/logo_ne3hy4.png
 ---
 
-# ✨ Eksa Framework v3.5.2
+# ✨ Eksa Framework v3.5.3
 
 **Eksa Framework** adalah *micro-framework* MVC (Model-View-Controller) modern yang dibangun di atas Ruby dan Rack. Didesain untuk pengembang yang menginginkan kecepatan, kode yang bersih, dan tampilan antarmuka **Glassmorphism** yang elegan secara *out-of-the-box*.
 
 ---
 
-## 🚀 Fitur Unggulan v3.5.2
+## 🚀 Fitur Unggulan v3.5.3
 
 * 💎 **Modern Glassmorphism UI**: Tampilan transparan yang indah dengan Tailwind CSS & Lucide Icons.
 * 📱 **Mobile Responsive Navigation**: Sistem navigasi adaptif dengan mobile drawer yang elegan.
@@ -22,7 +22,7 @@ image: https://res.cloudinary.com/dzsqaauqn/image/upload/v1773645204/logo_ne3hy4
 * 💾 **Agnostic Database Engine**: Dukungan multi-database (**SQLite** & **MongoDB Atlas**) dengan sistem adapter yang otomatis dan transparan.
 * 🛡️ **Secure Environment Variables**: Dukungan file `.env` untuk menyimpan kredensial database (MongoDB URI) secara aman.
 * ⚙️ **JIT Schema Initialization**: Inisialisasi tabel/koleksi secara otomatis tepat saat model pertama kali diakses.
-* 🧪 **Built-in Testing**: Lingkungan pengujian otomatis siap pakai menggunakan RSpec dan `rack-test`.
+* 🧪 **Built-in Testing**: Lingkungan pengujian otomatis siap pakai menggunakan **EksaMination** dan `rack-test`.
 * 🛡️ **Built-in Authentication**: Sistem keamanan BCrypt dengan proteksi sesi Rack untuk registrasi log-in area Admin.
 * 📝 **Interactive CMS Dashboard**: Panel admin integratif untuk mengedit isi blog Markdown & transisi visibilitas via UI.
 * 🔍 **Dynamic SEO Engine**: Penanganan otomatis file `robots.txt`, `sitemap.xml`, dan dukungan **JSON-LD** (Structured Data).
@@ -121,10 +121,11 @@ Eksa secara otomatis menghasilkan:
 - **JSON-LD**: Skema `BlogPosting` dan `WebSite` disematkan otomatis pada layout untuk peringkat SEO yang lebih baik.
 
 ### 5. Menjalankan Test
-Gunakan RSpec yang sudah terkonfigurasi untuk memastikan aplikasi stabil:
+Gunakan **EksaMination** (pendekatan pengujian yang lebih ringan dan terintegrasi) untuk memastikan aplikasi stabil:
 
 ```bash
-bundle exec rspec
+# Menjalankan semua test dengan format dokumentasi
+bundle exec eksa-mination -f documentation
 ```
 
 ---

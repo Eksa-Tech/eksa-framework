@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative 'spec_helper'
 
 class RecurrentModel < Eksa::Model
   def self.setup_schema
